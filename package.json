@@ -1,0 +1,26 @@
+{
+  "name": "jamdox",
+  "version": "0.0.1",
+  "description": "Jamdox",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/espetey/jamdox",
+  "keywords": [
+    "music",
+    "archive.org",
+    "data",
+    "data visualization"
+  ],
+  "author": "espetey",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "request": "^2.67.0",
+    "xml2js": "^0.4.15"
+  },
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
