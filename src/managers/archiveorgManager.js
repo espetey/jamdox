@@ -8,8 +8,17 @@ const request = require('request')
 const parseXmlString = require('xml2js').parseString
 const _ = require('underscore')
 
+module.exports.fetchAllArtists = function fetchAllArtists() {
+  getCreators(500, function(c) {
+    const creators = _.chain(c)
+      .map(function(creator){return creator['creator']})
+      .uniq()
+      .value()
+  })
+}
+
 // todo convert to generators or promises
-function fetchArtist(artist) {
+module.exports.fetchArtist = function fetchArtist(artist) {
   const creator = artist;
 
   // testId for testing routes
@@ -35,7 +44,18 @@ function fetchArtist(artist) {
   })
 }
 
-module.exports.fetchArtist = fetchArtist;
+// module.exports.fetchArtist = fetchArtist;
+
+// get specific number of creators
+// todo add paging
+function getCreators(count, callback) {
+  const reqPath = 'https://archive.org/advancedsearch.php?q=mediatype:etree&fl[]=creator&sort[]=downloads+desc&rows=' + count + '&output=json'
+  request(reqPath, function (err, response, body) {
+    const resJson = JSON.parse(response.body)
+    var rawCreators = resJson.response.docs
+    callback(rawCreators)
+  })
+}
 
 // get total number of identifiers before future queries
 // for  paging or throttling purposes (e.g. grateful dead has 11k+)
