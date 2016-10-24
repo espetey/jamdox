@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = [{
-  label: 'Edit',
+  label: 'Artists',
   submenu: [{
     label: 'Undo',
     accelerator: 'CmdOrCtrl+Z',
